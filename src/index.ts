@@ -1,11 +1,16 @@
 #!/usr/bin/env node
+import { formatOutput } from './formatter';
 
-const username = process.argv[2];
+async function main() {
+  const username = process.argv[2];
 
-if (!username) {
-  console.error('Usage: github-activity <username>');
-  process.exit(1);
+  if (!username) {
+    console.error('Usage: github-activity <username>');
+    process.exit(1);
+  }
+
+  const result = await formatOutput(username);
+  console.log(result);
 }
 
-console.log(`Fetching activity for: ${username}...`);
-// TODO: implement GitHub API call
+main().catch(console.error);
